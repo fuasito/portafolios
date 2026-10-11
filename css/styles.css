@@ -1,0 +1,33 @@
+html {
+    background-color: gray;
+    color: black;
+    text-align: center;
+    text-indent: 0%;
+}
+h1:hover{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+img {
+    width: 117px;
+    height: 200px;
+}
+
+legend:hover {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+    color: green;
+}
+
+button:hover {
+    background-color: aquamarine;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button:focus {
+    background-color: aqua;
+}
