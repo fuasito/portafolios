@@ -1,0 +1,82 @@
+<div class="space" [attr.data-planet]="planet()" aria-hidden="true">
+  <div class="stars"></div>
+  <div class="planet"></div>
+</div>
+<p class="where" aria-live="polite">{{ i18n.t('planet.here') }} <b>{{ i18n.t('planet.' + planet()) }}</b></p>
+
+<section id="home" class="stop wrap" data-planet="sun">
+  <h1>Fouad Aharchi Aharchi</h1>
+  <p class="lead">{{ i18n.t('hero.role') }}</p>
+  <p class="hint">{{ i18n.t('hero.hint') }}</p>
+  <p class="actions">
+    <button type="button" class="btn primary" (click)="go('projects')">{{ i18n.t('hero.cta1') }}</button>
+  </p>
+</section>
+
+<section id="about" class="stop wrap" data-planet="mercury">
+  <h2>{{ i18n.t('about.title') }}</h2>
+  <p>{{ i18n.t('about.p1') }}</p>
+  <p>{{ i18n.t('about.p2') }}</p>
+</section>
+
+<section id="experience" class="stop wrap" data-planet="venus">
+  <h2>{{ i18n.t('exp.title') }}</h2>
+  <h3>{{ i18n.t('exp.role') }}</h3>
+  <p>{{ i18n.t('exp.desc') }}</p>
+</section>
+
+<section id="projects" class="stop wrap" data-planet="earth">
+  <h2>{{ i18n.t('proj.title') }}</h2>
+  <article class="project">
+    <h3>{{ i18n.t('proj.tfg.t') }}</h3>
+    <p>{{ i18n.t('proj.tfg.d') }}</p>
+    <p class="tags">Kotlin, Android, XML layouts</p>
+    <!-- CAMBIAR: enlace real del repositorio -->
+    <a href="https://github.com/fuasito/NOMBRE-REPO-TFG">{{ i18n.t('proj.code') }}</a>
+  </article>
+  <article class="project">
+    <h3>{{ i18n.t('proj.tetris.t') }}</h3>
+    <p>{{ i18n.t('proj.tetris.d') }}</p>
+    <p class="tags">Java</p>
+    <!-- CAMBIAR -->
+    <a href="https://github.com/fuasito/NOMBRE-REPO-TETRIS">{{ i18n.t('proj.code') }}</a>
+  </article>
+  <article class="project">
+    <h3>{{ i18n.t('proj.evo.t') }}</h3>
+    <p>{{ i18n.t('proj.evo.d') }}</p>
+    <p class="tags">Angular, HTML, SCSS, JavaScript</p>
+    <a routerLink="/transformation">{{ i18n.t('proj.page') }}</a>
+  </article>
+</section>
+
+<section id="cv" class="stop wrap" data-planet="mars">
+  <h2>{{ i18n.t('cv.title') }}</h2>
+  <p>{{ i18n.t('cv.text') }}</p>
+  <!-- CAMBIAR: sube tu CV a public/cv/ con este nombre -->
+  <p class="actions"><a class="btn primary" href="cv/Fouad-Aharchi-CV.pdf" download>{{ i18n.t('cv.btn') }}</a></p>
+</section>
+
+<section id="hard" class="stop wrap" data-planet="jupiter">
+  <h2>{{ i18n.t('hard.title') }}</h2>
+  <ul>@for (h of hard; track h) { <li>{{ h }}</li> }</ul>
+</section>
+
+<section id="soft" class="stop wrap" data-planet="saturn">
+  <h2>{{ i18n.t('soft.title') }}</h2>
+  <ul>@for (s of soft; track s) { <li>{{ i18n.t(s) }}</li> }</ul>
+</section>
+
+<section id="contact" class="stop wrap" data-planet="neptune">
+  <h2>{{ i18n.t('contact.title') }}</h2>
+  <p>{{ i18n.t('contact.text') }}</p>
+  <ul class="contact">
+    <li>
+      <a [href]="'mailto:' + email">{{ email }}</a>
+      <button type="button" class="copy" (click)="copy()">{{ copied() ? i18n.t('contact.copied') : i18n.t('contact.copy') }}</button>
+    </li>
+    <!-- CAMBIAR: tus enlaces reales -->
+    <li><a href="https://www.linkedin.com/in/TU-USUARIO" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://github.com/fuasito" rel="noopener">GitHub</a></li>
+    <li><a href="https://www.infojobs.net/" rel="noopener">InfoJobs</a></li>
+  </ul>
+</section>

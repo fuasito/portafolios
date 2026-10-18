@@ -1,0 +1,13 @@
+.bar {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+}
+.bar-in { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; justify-content: space-between; padding-block: .75rem; }
+.brand { font: 700 1.1rem 'Bricolage Grotesque', sans-serif; color: var(--text); background: none; border: 0; cursor: pointer; padding: 0; }
+nav { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .95rem; }
+nav button, nav a { color: var(--muted); background: none; border: 0; font: inherit; padding: 0; cursor: pointer; text-decoration: none; }
+nav button:hover, nav a:hover, nav a.on { color: var(--link); }
+.tools { display: flex; gap: .5rem; }
+.tool { font: inherit; font-size: .9rem; padding: .25rem .7rem; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: var(--text); cursor: pointer; }
+.tool:hover { border-color: var(--sun); color: var(--link); }

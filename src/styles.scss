@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap');
+
+:root, [data-theme='dark'] {
+  --bg: #0f1730; --surface: #18234a; --text: #ece8dd; --muted: #aab2c8; --line: #2b3869;
+  --sun: #f4bf4f; --on-sun: #1b1b1b; --link: #f4bf4f; --accent: #7fb0ff; --star: #ffffff;
+}
+[data-theme='light'] {
+  --bg: #f3f5fb; --surface: #ffffff; --text: #1a2140; --muted: #4a5478; --line: #cfd6ea;
+  --sun: #a86500; --on-sun: #ffffff; --link: #8a4f00; --accent: #2a5fc4; --star: #1a2140;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 1.0625rem/1.65 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  transition: background-color .3s, color .3s;
+}
+.wrap { max-width: 60rem; margin-inline: auto; padding-inline: 1.25rem; }
+h1, h2, h3 { font-family: 'Bricolage Grotesque', 'Segoe UI', sans-serif; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; }
+h2 { font-size: 1.9rem; font-weight: 700; margin-bottom: 1.25rem; }
+h3 { font-size: 1.2rem; font-weight: 500; margin-bottom: .5rem; }
+p { max-width: 62ch; margin: 0 0 1rem; }
+a { color: var(--link); text-underline-offset: 3px; }
+a:hover { color: var(--text); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.btn {
+  display: inline-block; padding: .7rem 1.25rem; border: 1px solid var(--line); border-radius: 6px;
+  background: transparent; color: var(--text); font: inherit; font-weight: 500; text-decoration: none; cursor: pointer;
+  &:hover { border-color: var(--sun); color: var(--link); }
+  &.primary { background: var(--sun); border-color: var(--sun); color: var(--on-sun); }
+  &.primary:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
+}
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+.tags { color: var(--accent); font-size: .95rem; }
+.project { padding-block: 1.5rem; border-top: 1px solid var(--line); &:first-of-type { border-top: 0; } }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

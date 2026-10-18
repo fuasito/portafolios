@@ -1,0 +1,17 @@
+<header class="bar">
+  <div class="wrap bar-in">
+    <button type="button" class="brand" (click)="go('home')">Fouad Aharchi</button>
+    <nav [attr.aria-label]="i18n.t('nav.label')">
+      @for (l of links; track l[0]) {
+        <button type="button" (click)="go(l[0])">{{ i18n.t(l[1]) }}</button>
+      }
+      <a routerLink="/transformation" routerLinkActive="on">{{ i18n.t('nav.transformation') }}</a>
+    </nav>
+    <div class="tools">
+      <button type="button" class="tool" (click)="i18n.toggle()" [attr.aria-label]="i18n.t('lang.label')">{{ i18n.t('lang.other') }}</button>
+      <button type="button" class="tool" (click)="theme.toggle()" [attr.aria-label]="i18n.t('theme.label')">
+        {{ theme.mode() === 'dark' ? i18n.t('theme.light') : i18n.t('theme.dark') }}
+      </button>
+    </div>
+  </div>
+</header>
