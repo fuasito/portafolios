@@ -34,4 +34,6 @@ export const EN: Record<string, string> = {
   'trans.dash.text': 'Interactive charts built from my real workout log: strength, volume, records and body weight.',
   'trans.pat.title': 'Essential movement patterns', 'trans.pat.download': 'Download the PDF',
   'trans.pat.soon': 'The full content of the guide will be added here.',
+  'trans.dash.open': 'Open the dashboard', 'dash.back': 'Back to my transformation',
+  'dash.missing': 'The dashboard file is missing: put it at public/dashboard/index.html.'
 };

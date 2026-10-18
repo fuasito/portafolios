@@ -1,0 +1,8 @@
+<section class="wrap page">
+  <p><a routerLink="/transformation">← {{ i18n.t('dash.back') }}</a></p>
+  <h1>{{ i18n.t('trans.dash.title') }}</h1>
+  @if (missing()) {
+    <p class="warn">{{ i18n.t('dash.missing') }}</p>
+  }
+  <iframe #frame src="dashboard/index.html" title="Training dashboard" [hidden]="missing()" (load)="onLoad()"></iframe>
+</section>

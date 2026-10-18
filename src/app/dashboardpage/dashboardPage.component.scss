@@ -1,0 +1,4 @@
+.page { padding-block: 2rem 3rem; min-height: calc(100vh - 4rem); background: var(--bg); position: relative; }
+h1 { margin-bottom: 1rem; }
+iframe { width: 100%; height: calc(100vh - 12rem); min-height: 620px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.warn { padding: 1rem 1.25rem; border: 1px solid var(--sun); border-radius: 8px; max-width: 46rem; }

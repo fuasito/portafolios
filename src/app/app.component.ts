@@ -13,5 +13,5 @@ import { ThemeService } from './theme.service';
 export class AppComponent {
   i18n = inject(I18nService);
   theme = inject(ThemeService); // se inyecta aquí para que aplique el tema al arrancar
-  year = new Date().getFullYear();
+  year = new Date().getFullYear(); // para el copyright del footer
 }

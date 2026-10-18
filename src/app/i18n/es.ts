@@ -34,4 +34,6 @@ export const ES: Record<string, string> = {
   'trans.dash.text': 'Gráficas interactivas creadas con mi registro real de entrenamientos: fuerza, volumen, récords y peso corporal.',
   'trans.pat.title': 'Patrones de movimiento esenciales', 'trans.pat.download': 'Descargar el PDF',
   'trans.pat.soon': 'Aquí se añadirá el contenido completo de la guía.',
+  'trans.dash.open': 'Abrir el dashboard', 'dash.back': 'Volver a mi cambio físico',
+  'dash.missing': 'Falta el archivo del dashboard: ponlo en public/dashboard/index.html.'
 };

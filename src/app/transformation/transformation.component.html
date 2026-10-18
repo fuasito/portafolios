@@ -1,7 +1,7 @@
 <section class="wrap block">
   <h1>{{ i18n.t('trans.title') }}</h1>
   <p class="lead">{{ i18n.t('trans.intro') }}</p>
-  <p><a routerLink="/">{{ i18n.t('trans.back') }}</a></p>
+  <p><a routerLink="/">← {{ i18n.t('trans.back') }}</a></p>
 </section>
 
 <section class="wrap block">
@@ -13,12 +13,12 @@
 <section class="wrap block">
   <h2>{{ i18n.t('trans.dash.title') }}</h2>
   <p>{{ i18n.t('trans.dash.text') }}</p>
-  <iframe #dash src="/public/dashboard/index.html" title="Dashboard" loading="lazy" (load)="sync()"></iframe>
+  <p class="actions"><a class="btn primary" routerLink="/dashboard">{{ i18n.t('trans.dash.open') }}</a></p>
 </section>
 
 <section class="wrap block">
   <h2>{{ i18n.t('trans.pat.title') }}</h2>
-  <p class="actions"><a class="btn primary" href="/public/patronesEsencialesGym.pdf" download>{{ i18n.t('trans.pat.download') }}</a></p>
+  <p class="actions"><a class="btn primary" href="pdf/patrones_esenciales_gym.pdf" download>{{ i18n.t('trans.pat.download') }}</a></p>
   <!-- AÑADIR: aquí va el contenido del PDF maquetado en HTML (en inglés y en español) -->
   <p>{{ i18n.t('trans.pat.soon') }}</p>
 </section>
