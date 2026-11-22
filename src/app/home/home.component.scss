@@ -28,7 +28,20 @@ li { margin-bottom: .35rem; &::marker { color: var(--sun); } }
 
 @media (max-width: 760px) { .about { flex-direction: column-reverse; } }
 
-// Las tarjetas se atenúan y se iluminan cuando llegas a su planeta
-.card { opacity: .35; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-.card.on { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .card { opacity: 1; transform: none; transition: none; } }
+// El movimiento de las tarjetas lo calcula el componente según el scroll
+.card { will-change: opacity, transform; }
+
+// Ruta del viaje: un punto por planeta, para saber dónde estás y saltar a cualquiera
+.route { position: fixed; right: 1.1rem; top: 50%; translate: 0 -50%; z-index: 5; display: flex; flex-direction: column; gap: .9rem; }
+.route button {
+  position: relative; width: 11px; height: 11px; padding: 0; border-radius: 50%;
+  border: 1px solid #c9d0e4; background: transparent; cursor: pointer; transition: transform .3s, background .3s;
+}
+.route button.on { background: var(--sun); border-color: var(--sun); transform: scale(1.5); }
+.route button:hover { border-color: var(--sun); }
+.route .tip {
+  position: absolute; right: 1.6rem; top: 50%; translate: 0 -50%; white-space: nowrap; font-size: .8rem;
+  color: #fff; background: #000a; padding: .15rem .5rem; border-radius: 6px; opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.route button:hover .tip, .route button:focus-visible .tip { opacity: 1; }
+@media (max-width: 760px) { .route { display: none; } }

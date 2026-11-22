@@ -15,6 +15,7 @@ const DEFS: { id: PlanetId; x: number; r: number; spin: number; bump?: number }[
 
 const clamp = (x: number, a: number, b: number) => Math.min(b, Math.max(a, x));
 const smooth = (t: number) => t * t * (3 - 2 * t);
+const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const tick = () => new Promise<void>(r => setTimeout(r));
 
 function tex(c: HTMLCanvasElement) {
@@ -304,80 +305,46 @@ export class SpaceScene {
   }
 
   // ---------- Cámara guiada por el scroll ----------
-  private pose(id: string) {
+    private pose(id: string) {
     const b = this.bodies.get(id) ?? this.bodies.get('sun')!;
-
-    // Distancia base: permite conservar el encuadre cinematográfico.
-    const d = 58;
-
-    const halfW =
-      Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2)) *
-      d * this.camera.aspect;
-
+    const d = b.r * 3.2 + 6; // cada cuerpo se ve con un tamaño parecido en pantalla
+    const halfW = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2)) * d * this.camera.aspect;
     const shift = halfW * (this.camera.aspect > 1.1 ? 0.5 : 0.15);
-
     return {
-      pos: new THREE.Vector3(
-        b.pos.x - shift,
-        b.r * 0.35 + 1,
-        b.pos.z + d
-      ),
-      target: new THREE.Vector3(
-        b.pos.x - shift,
-        b.r * 0.1,
-        b.pos.z
-      )
+      pos: new THREE.Vector3(b.pos.x - shift, b.r * 0.35 + 1, b.pos.z + d),
+      target: new THREE.Vector3(b.pos.x - shift, b.r * 0.1, b.pos.z),
+      x: b.pos.x,
     };
   }
 
-
-  
   private updateCamera(dt: number) {
-    const stops = Array.from(
-      document.querySelectorAll<HTMLElement>('.stop[data-planet]')
-    );
-
+    const stops = Array.from(document.querySelectorAll<HTMLElement>('.stop[data-planet]'));
     if (!stops.length) return;
-
     const y = window.scrollY + window.innerHeight * 0.5;
-
-    const centers = stops.map(e => {
-      const r = e.getBoundingClientRect();
-      return r.top + window.scrollY + r.height / 2;
-    });
-
+    const centers = stops.map(e => { const r = e.getBoundingClientRect(); return r.top + window.scrollY + r.height / 2; });
     let i = 0;
     while (i < stops.length - 1 && y >= centers[i + 1]) i++;
-
     const next = Math.min(i + 1, stops.length - 1);
-    const rawT = i < stops.length - 1 ? clamp((y - centers[i]) / Math.max(1, centers[next] - centers[i]),0,1) : 0;
+    const raw = i < next ? clamp((y - centers[i]) / Math.max(1, centers[next] - centers[i]), 0, 1) : 0;
 
-    const t = smooth(rawT);
+    // El planeta se queda quieto y encuadrado en el 22 % inicial y final de cada tramo
+    const DWELL = 0.22;
+    const e = easeInOut(clamp((raw - DWELL) / (1 - 2 * DWELL), 0, 1));
 
-    const a = this.pose(stops[i].dataset['planet']!);
-    const b = this.pose(stops[next].dataset['planet']!);
+    const a = this.pose(stops[i].dataset['planet']!), b = this.pose(stops[next].dataset['planet']!);
+    const pos = a.pos.clone().lerp(b.pos, e), target = a.target.clone().lerp(b.target, e);
 
-    const pos = a.pos.clone().lerp(b.pos, t);
-    const target = a.target.clone().lerp(b.target, t);
-
-    // Zoom cinematográfico: acercamiento y alejamiento gradual.
-    // El planeta entrante se aproxima y después recupera distancia.
-    const zoomAmount = Math.sin(Math.PI * rawT);
-    const zoomDistance = 30 * zoomAmount;
-
-    const viewDirection = pos.clone().sub(target).normalize();
-    pos.addScaledVector(viewDirection, -zoomDistance);
+    // Zoom out → zoom in: la cámara se aleja entre planetas (más cuanto más lejos están) y se acerca al llegar
+    const back = (14 + Math.abs(b.x - a.x) * 0.5) * Math.pow(Math.sin(Math.PI * e), 1.2);
+    pos.z += back;
+    pos.y += back * 0.18;
 
     if (this.first || this.reduced) {
-      this.camPos.copy(pos);
-      this.camTarget.copy(target);
-      this.first = false;
+      this.camPos.copy(pos); this.camTarget.copy(target); this.first = false;
     } else {
-      const k = 1 - Math.exp(-dt * 3.5);
-      this.camPos.lerp(pos, k);
-      this.camTarget.lerp(target, k);
+      const k = 1 - Math.exp(-dt * 5);
+      this.camPos.lerp(pos, k); this.camTarget.lerp(target, k);
     }
-
     this.camera.position.copy(this.camPos);
     this.camera.lookAt(this.camTarget);
   }

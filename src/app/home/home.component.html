@@ -1,8 +1,16 @@
 <app-space-background />
 <p class="where" aria-live="polite">{{ i18n.t('planet.here') }} <b>{{ i18n.t('planet.' + planet()) }}</b></p>
 
+<nav class="route" [attr.aria-label]="i18n.t('planet.here')">
+  @for (s of route; track s[0]) {
+    <button type="button" [class.on]="planet() === s[1]" [attr.aria-label]="i18n.t('planet.' + s[1])" (click)="go(s[0])">
+      <span class="tip">{{ i18n.t('planet.' + s[1]) }}</span>
+    </button>
+  }
+</nav>
+
 <section id="home" class="stop wrap" data-planet="sun">
-  <div class="card plain" [class.on]="planet() === 'sun'">
+  <div class="card plain">
     <h1>Fouad Aharchi Aharchi</h1>
     <p class="lead">{{ i18n.t('hero.role') }}</p>
     <p class="hint">{{ i18n.t('hero.hint') }}</p>
@@ -11,7 +19,7 @@
 </section>
 
 <section id="about" class="stop wrap" data-planet="mercury">
-  <div class="card wide" [class.on]="planet() === 'mercury'">
+  <div class="card wide">
     <h2>{{ i18n.t('about.title') }}</h2>
     <div class="about">
       <div>
@@ -27,7 +35,7 @@
 </section>
 
 <section id="experience" class="stop wrap" data-planet="venus">
-  <div class="card" [class.on]="planet() === 'venus'">
+  <div class="card">
     <h2>{{ i18n.t('exp.title') }}</h2>
     <h3>{{ i18n.t('exp.role') }}</h3>
     <p>{{ i18n.t('exp.desc') }}</p>
@@ -35,7 +43,7 @@
 </section>
 
 <section id="projects" class="stop wrap" data-planet="earth">
-  <div class="card" [class.on]="planet() === 'earth'">
+  <div class="card">
     <h2>{{ i18n.t('proj.title') }}</h2>
     <article class="project">
       <h3>{{ i18n.t('proj.tfg.t') }}</h3>
@@ -61,7 +69,7 @@
 </section>
 
 <section id="cv" class="stop wrap" data-planet="mars">
-  <div class="card" [class.on]="planet() === 'mars'">
+  <div class="card">
     <h2>{{ i18n.t('cv.title') }}</h2>
     <p>{{ i18n.t('cv.text') }}</p>
     <!-- CAMBIAR: sube tu CV a public/cv/ con este nombre -->
@@ -70,21 +78,21 @@
 </section>
 
 <section id="hard" class="stop wrap" data-planet="jupiter">
-  <div class="card" [class.on]="planet() === 'jupiter'">
+  <div class="card">
     <h2>{{ i18n.t('hard.title') }}</h2>
     <ul>@for (h of hard; track h) { <li>{{ h }}</li> }</ul>
   </div>
 </section>
 
 <section id="soft" class="stop wrap" data-planet="saturn">
-  <div class="card" [class.on]="planet() === 'saturn'">
+  <div class="card">
     <h2>{{ i18n.t('soft.title') }}</h2>
     <ul>@for (s of soft; track s) { <li>{{ i18n.t(s) }}</li> }</ul>
   </div>
 </section>
 
 <section id="contact" class="stop wrap" data-planet="neptune">
-  <div class="card" [class.on]="planet() === 'neptune'">
+  <div class="card">
     <h2>{{ i18n.t('contact.title') }}</h2>
     <p>{{ i18n.t('contact.text') }}</p>
     <ul class="contact">
@@ -92,7 +100,8 @@
         <a [href]="'mailto:' + email">{{ email }}</a>
         <button type="button" class="copy" (click)="copy()">{{ copied() ? i18n.t('contact.copied') : i18n.t('contact.copy') }}</button>
       </li>
-      <li><a href="https://www.linkedin.com/in/fouad-aharchi-aharchi" rel="noopener">LinkedIn</a></li>
+      <!-- CAMBIAR: tus enlaces reales -->
+      <li><a href="https://www.linkedin.com/in/TU-USUARIO" rel="noopener">LinkedIn</a></li>
       <li><a href="https://github.com/fuasito" rel="noopener">GitHub</a></li>
       <li><a href="https://www.infojobs.net/" rel="noopener">InfoJobs</a></li>
     </ul>
